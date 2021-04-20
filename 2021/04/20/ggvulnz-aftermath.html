@@ -9,22 +9,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Milan Magyar</title>
-<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+<!-- begin _includes/seo.html --><title>GGvulnz aftermath - How I forced Google to redesign Groups* - Milan Magyar</title>
+<meta name="description" content="I’m a bit late with this post, but people were wondering if the methods described in the first GGVulnz post are still applicable today.">
 
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Milan Magyar">
-<meta property="og:title" content="Milan Magyar">
-<meta property="og:url" content="https://milangfx.github.io/">
+<meta property="og:title" content="GGvulnz aftermath - How I forced Google to redesign Groups*">
+<meta property="og:url" content="https://milangfx.github.io/2021/04/20/ggvulnz-aftermath.html">
 
 
-  <meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
-
-
-
+  <meta property="og:description" content="I’m a bit late with this post, but people were wondering if the methods described in the first GGVulnz post are still applicable today.">
 
 
 
@@ -32,9 +29,14 @@
 
 
 
+  <meta property="article:published_time" content="2021-04-20T22:09:23+02:00">
 
 
-<link rel="canonical" href="https://milangfx.github.io/">
+
+
+
+
+<link rel="canonical" href="https://milangfx.github.io/2021/04/20/ggvulnz-aftermath.html">
 
 
 
@@ -97,7 +99,7 @@
 
   </head>
 
-  <body class="layout--home">
+  <body class="layout--posts">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -146,19 +148,75 @@
 
   <div class="archive">
     
-      <h1 id="page-title" class="page__title"></h1>
+      <h1 id="page-title" class="page__title">GGvulnz aftermath - How I forced Google to redesign Groups*</h1>
     
-    
+    <p>I’m a bit late with this post, but people were wondering if the methods described in the first <a href="/2020/01/20/ggvulnz.html">GGVulnz post</a> are still applicable today.</p>
+
+<p>In short, they are not.</p>
+
+<p>Google has released a new design of Groups which solved the main problems that enabled the exploit with the registration emails.</p>
+
+<p>The new Groups UI completely lacks the old “forumsearch” view, so you can no longer list the public groups / mailing lists of a public domain.</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/android.png" alt="" />
+This view is gone</p>
+
+<p>This page was also where you could search for emails even when there were no public lists. So searching in a public domain is gone as well.</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/search_password.png" alt="" />
+This is gone as well</p>
+
+<p>With these changes the original logic flaw is essentially rendered infeasible, since you can’t easily find vulnerable groups.
+The exploit technically should still work but you would also have to guess the name of a public group within the domain.
+Public groups can be accessed in this format:<br />
+https://groups.google.com/a/$domain/g/$listname</p>
+
+<p>You can still check the necessary permissions in the About page of the new design:</p>
+
+<p><img src="/img/ggvulnz/about-new.png" alt="" /></p>
+
+<p>Timeline of the new design rollout:</p>
+
+<p><strong>March 9, 2020</strong> - (less than 2 months after my blog post) - <a href="https://workspaceupdates.googleblog.com/2020/03/new-google-groups-beta.html">Beta launch</a><br />
+<strong>May 26, 2020</strong> - <a href="https://workspaceupdates.googleblog.com/2020/05/new-google-groups-generally-available.html">New design is generally available</a><br />
+<strong>September 15, 2020</strong> - <a href="https://workspaceupdates.googleblog.com/2020/09/new-google-groups-default.html">New design is the default for all users</a><br />
+<strong>November 10, 2020</strong> -  <a href="https://workspaceupdates.googleblog.com/2020/10/new-groups-will-become-only-user.html">Old design is turned off</a><br />
+<strong>September 17, 2020</strong> - <a href="https://workspaceupdates.googleblog.com/2020/09/groups-admin-console-audit-logs.html">Updated interface for admins</a> to control permissions. This might seem trivial, but having a clear UI for admins is a big step forward in preventing accidental misconfigurations.</p>
+
+<p>*Of course I cannot possibly know whether my work has anything to do with the new Groups UI, since removing the “forumsearch” view is not shown under <a href="https://support.google.com/a/answer/9687393#deprecated">Deprecated features</a>.</p>
+
+<p>GGvulnz might not be the sole reason behind the new UI, but I think it was at least taken into account during design. You can’t just leave out a core feature - the list of public groups - accidentally. 
+I guess the old design allowing the exploit wasn’t actually “Intended Behaviour” as Google claimed.</p>
+
+<p>I ended my previous post with this: <em>“I’m publishing this in the hope that the publicity would push Google to mitigate the risk and also to help raise awareness.”</em>
+It appears that sometimes whining on the Internet actually works. Although I would’ve preferred if my original report was acknowledged.</p>
 
 
-<h3 class="archive__subtitle">Recent Posts</h3>
-
-
-
-
-<div class="entries-list">
+<ul class="taxonomy__index">
   
-    
+  
+    <li>
+      <a href="#2021">
+        <strong>2021</strong> <span class="taxonomy__count">1</span>
+      </a>
+    </li>
+  
+    <li>
+      <a href="#2020">
+        <strong>2020</strong> <span class="taxonomy__count">1</span>
+      </a>
+    </li>
+  
+</ul>
+
+
+
+
+  <section id="2021" class="taxonomy__section">
+    <h2 class="archive__subtitle">2021</h2>
+    <div class="entries-list">
+      
+        
 
 
 
@@ -203,8 +261,16 @@
   </article>
 </div>
 
-  
-    
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
+
+  <section id="2020" class="taxonomy__section">
+    <h2 class="archive__subtitle">2020</h2>
+    <div class="entries-list">
+      
+        
 
 
 
@@ -249,10 +315,10 @@
   </article>
 </div>
 
-  
-</div>
-
-
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
 
 
   </div>

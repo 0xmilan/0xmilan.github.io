@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://milangfx.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://milangfx.github.io/" rel="alternate" type="text/html" /><updated>2021-04-20T23:49:01+02:00</updated><id>https://milangfx.github.io/feed.xml</id><title type="html">Milan Magyar</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">GGvulnz aftermath - How I forced Google to redesign Groups*</title><link href="https://milangfx.github.io/2021/04/20/ggvulnz-aftermath.html" rel="alternate" type="text/html" title="GGvulnz aftermath - How I forced Google to redesign Groups*" /><published>2021-04-20T22:09:23+02:00</published><updated>2021-04-20T22:09:23+02:00</updated><id>https://milangfx.github.io/2021/04/20/ggvulnz-aftermath</id><content type="html" xml:base="https://milangfx.github.io/2021/04/20/ggvulnz-aftermath.html">&lt;p&gt;I’m a bit late with this post, but people were wondering if the methods described in the first &lt;a href=&quot;/2020/01/20/ggvulnz.html&quot;&gt;GGVulnz post&lt;/a&gt; are still applicable today.&lt;/p&gt;
+
+&lt;p&gt;In short, they are not.&lt;/p&gt;
+
+&lt;p&gt;Google has released a new design of Groups which solved the main problems that enabled the exploit with the registration emails.&lt;/p&gt;
+
+&lt;p&gt;The new Groups UI completely lacks the old “forumsearch” view, so you can no longer list the public groups / mailing lists of a public domain.&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/android.png&quot; alt=&quot;&quot; /&gt;
+This view is gone&lt;/p&gt;
+
+&lt;p&gt;This page was also where you could search for emails even when there were no public lists. So searching in a public domain is gone as well.&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/search_password.png&quot; alt=&quot;&quot; /&gt;
+This is gone as well&lt;/p&gt;
+
+&lt;p&gt;With these changes the original logic flaw is essentially rendered infeasible, since you can’t easily find vulnerable groups.
+The exploit technically should still work but you would also have to guess the name of a public group within the domain.
+Public groups can be accessed in this format:&lt;br /&gt;
+https://groups.google.com/a/$domain/g/$listname&lt;/p&gt;
+
+&lt;p&gt;You can still check the necessary permissions in the About page of the new design:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/ggvulnz/about-new.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Timeline of the new design rollout:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;March 9, 2020&lt;/strong&gt; - (less than 2 months after my blog post) - &lt;a href=&quot;https://workspaceupdates.googleblog.com/2020/03/new-google-groups-beta.html&quot;&gt;Beta launch&lt;/a&gt;&lt;br /&gt;
+&lt;strong&gt;May 26, 2020&lt;/strong&gt; - &lt;a href=&quot;https://workspaceupdates.googleblog.com/2020/05/new-google-groups-generally-available.html&quot;&gt;New design is generally available&lt;/a&gt;&lt;br /&gt;
+&lt;strong&gt;September 15, 2020&lt;/strong&gt; - &lt;a href=&quot;https://workspaceupdates.googleblog.com/2020/09/new-google-groups-default.html&quot;&gt;New design is the default for all users&lt;/a&gt;&lt;br /&gt;
+&lt;strong&gt;November 10, 2020&lt;/strong&gt; -  &lt;a href=&quot;https://workspaceupdates.googleblog.com/2020/10/new-groups-will-become-only-user.html&quot;&gt;Old design is turned off&lt;/a&gt;&lt;br /&gt;
+&lt;strong&gt;September 17, 2020&lt;/strong&gt; - &lt;a href=&quot;https://workspaceupdates.googleblog.com/2020/09/groups-admin-console-audit-logs.html&quot;&gt;Updated interface for admins&lt;/a&gt; to control permissions. This might seem trivial, but having a clear UI for admins is a big step forward in preventing accidental misconfigurations.&lt;/p&gt;
+
+&lt;p&gt;*Of course I cannot possibly know whether my work has anything to do with the new Groups UI, since removing the “forumsearch” view is not shown under &lt;a href=&quot;https://support.google.com/a/answer/9687393#deprecated&quot;&gt;Deprecated features&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;GGvulnz might not be the sole reason behind the new UI, but I think it was at least taken into account during design. You can’t just leave out a core feature - the list of public groups - accidentally. 
+I guess the old design allowing the exploit wasn’t actually “Intended Behaviour” as Google claimed.&lt;/p&gt;
+
+&lt;p&gt;I ended my previous post with this: &lt;em&gt;“I’m publishing this in the hope that the publicity would push Google to mitigate the risk and also to help raise awareness.”&lt;/em&gt;
+It appears that sometimes whining on the Internet actually works. Although I would’ve preferred if my original report was acknowledged.&lt;/p&gt;</content><author><name></name></author><summary type="html">I’m a bit late with this post, but people were wondering if the methods described in the first GGVulnz post are still applicable today.</summary></entry><entry><title type="html">GGvulnz - How I hacked hundreds of companies through Google Groups</title><link href="https://milangfx.github.io/2020/01/20/ggvulnz.html" rel="alternate" type="text/html" title="GGvulnz - How I hacked hundreds of companies through Google Groups" /><published>2020-01-20T00:00:00+01:00</published><updated>2020-01-20T00:00:00+01:00</updated><id>https://milangfx.github.io/2020/01/20/ggvulnz</id><content type="html" xml:base="https://milangfx.github.io/2020/01/20/ggvulnz.html">&lt;p&gt;This logic flaw is the lovechild of two previous reports:&lt;/p&gt;
+
+&lt;p&gt;One: &lt;a href=&quot;https://medium.com/intigriti/how-i-hacked-hundreds-of-companies-through-their-helpdesk-b7680ddc2d4c&quot;&gt;How I hacked hundreds of companies through their helpdesk&lt;/a&gt; — aka “Ticket Trick” by Inti De Ceukelaire&lt;/p&gt;
+
+&lt;p&gt;Two: &lt;a href=&quot;https://www.kennasecurity.com/blog/widespread-google-groups-misconfiguration-exposes-sensitive-information/&quot;&gt;Kenna Security’s research on the widespread Google Groups misconfiguration&lt;/a&gt; issue affecting thousands of instances, “Fortune 500 organizations; Hospitals; Universities and Colleges; Newspapers and Television stations; and even US government agencies”.&lt;/p&gt;
+
+&lt;p&gt;I would suggest reading both as they are the building blocks of this one.&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/logo.png&quot; alt=&quot;ggvulnz_logo.png&quot; /&gt;
+Yes, a name and a logo. I had to.&lt;/p&gt;
+
+&lt;p&gt;I was looking at the emails inside a company’s Google Groups instance when I noticed some are related to various account registrations. My spidey sense told me to look up &lt;a href=&quot;https://medium.com/u/f9e27197ffb5&quot;&gt;Inti De Ceukelaire&lt;/a&gt;’s paper, something I faintly remembered reading over 2 years ago. After processing that report again, I realized it’s actually relevant to my scenario.&lt;/p&gt;
+
+&lt;p&gt;The Ticket Trick bug relied on the existence of issue trackers or helpdesk software that allow you to open tickets through email. An attacker had to sign up to the target’s main service with a special email address, exploiting the lack of address validation (or circumventing the one in place) and log into the target’s help desk service through SSO. In this case, all those components are simply replaced by the service of Google Groups mailing lists.&lt;/p&gt;
+
+&lt;p&gt;Here’s the sequence diagram of the bug:&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/sequence.png&quot; alt=&quot;&quot; /&gt;
+My finest work in GIMP so far&lt;/p&gt;
+
+&lt;h3 id=&quot;method-a&quot;&gt;METHOD A)&lt;/h3&gt;
+
+&lt;p&gt;The method above works when the mailing list has the “Anyone can view content.” and “Anyone can post.” permissions.&lt;br /&gt;
+The first one is necessary for us to be able to see and open the email and the second is to let Slack (and other external services) post to the mailing list.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/ggvulnz/about.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the screenshot below the green text under the mailing list indicates that you have at least view access to the topics/emails.&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/android.png&quot; alt=&quot;&quot; /&gt;
+Only @android.com email addresses can post, so these mailing lists are not vulnerable&lt;/p&gt;
+
+&lt;p&gt;How to exploit this logic flaw in a few easy steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Visit https://groups.google.com/a/$domain/forum/#!forumsearch/ and look for a public mailing list&lt;/li&gt;
+  &lt;li&gt;Clicking the list will take you to: https://groups.google.com/a/$domain/forum/#!forum/$listname&lt;/li&gt;
+  &lt;li&gt;Visit one of these pages in another tab and enter this email address: $listname@$domain&lt;br /&gt;
+ &lt;a href=&quot;https://slack.com/signin/find&quot;&gt;https://slack.com/signin/find&lt;/a&gt;&lt;br /&gt;
+ &lt;a href=&quot;https://www.yammer.com/signup/&quot;&gt;https://www.yammer.com/signup/&lt;/a&gt;&lt;br /&gt;
+ &lt;a href=&quot;https://work.workplace.com/&quot;&gt;https://work.workplace.com/&lt;/a&gt;&lt;br /&gt;
+ &lt;a href=&quot;https://twitter.com/account/begin_password_reset&quot;&gt;https://twitter.com/account/begin_password_reset&lt;/a&gt;
+ &lt;a href=&quot;https://www.facebook.com/login/identify/&quot;&gt;https://www.facebook.com/login/identify/&lt;/a&gt;&lt;br /&gt;
+ &lt;a href=&quot;https://www.instagram.com/accounts/password/reset/&quot;&gt;https://www.instagram.com/accounts/password/reset/&lt;/a&gt;&lt;br /&gt;
+ …&lt;/li&gt;
+  &lt;li&gt;Refresh the mailing list from Step 2) and open the email you got from the service in Step 3)&lt;/li&gt;
+  &lt;li&gt;Click the confirmation link (or copy the account recovery code, other ~6 digit code from the email’s subject / body).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;method-b&quot;&gt;METHOD B)&lt;/h3&gt;
+
+&lt;p&gt;There’s an other case when the Google Groups instance in misconfigured in a way that all mailing lists seem to be locked off properly at first glance, but search results disclose snippets of private emails’ around the search keywords.&lt;/p&gt;
+
+&lt;p&gt;In this example none of the mailing lists have the green &lt;em&gt;“#XY topics last post: $DATE”&lt;/em&gt; indicator, so we shouldn’t be able to read emails sent to them.&lt;br /&gt;
+The domain owner is probably confident that unathorized parties don’t have access to internal communication.&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/nogreen.png&quot; alt=&quot;&quot; /&gt;
+No green text here&lt;/p&gt;
+
+&lt;p&gt;But searching for “password” for example, discloses sensitive emails:&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/search_password.png&quot; alt=&quot;&quot; /&gt;
+:(&lt;/p&gt;
+
+&lt;p&gt;Note that this is something that Google has known about since at least Kenna Security’s research back in 2018. Yet they decided that the privacy and security of their customers is not that important that anything should be done about it. Google Groups access controls are still as foggy as they were years ago.&lt;br /&gt;
+GDPR’s &lt;a href=&quot;https://en.wikipedia.org/wiki/General_Data_Protection_Regulation&quot;&gt;wiki page&lt;/a&gt; says that “Controllers and processors of personal data must put in place appropriate technical and organizational measures to implement the data protection principles.” I think Google should at least alert its customers when those “appropriate technical measures” are not in place.&lt;/p&gt;
+
+&lt;p&gt;Compared to METHOD A), the steps to exploit are a bit different here:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;You don’t know the name of the mailing list that is misconfigured to begin with, so you first search for something that has a high probability of being in an email’s subject or body, something like the letter ‘a’, “hi” or “hello”.&lt;/li&gt;
+  &lt;li&gt;Hover your mouse over the group’s name in one of the search results to see the URL it points to:&lt;br /&gt;
+ &lt;a href=&quot;https://groups.google.com/a/$domain/forum/#!forum/$listname&quot;&gt;https://groups.google.com/a/$domain/forum/#!forum/$listname&lt;/a&gt; corresponds to the $listname@$domain email address.&lt;/li&gt;
+  &lt;li&gt;Send a test email or directly a signup / password reset email from Method A)’s Step 3) and hope that it appears in your search results, since you didn’t have a chance to confirm the “Anyone can post” permission because you don’t have access to the “About Group” page either.&lt;/li&gt;
+  &lt;li&gt;Search for your test email to confirm that external senders are allowed or search for a string that’s part of the target service’s signup / password reset email.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/search_facebook.png&quot; alt=&quot;&quot; /&gt;
+Signing up for Facebook with a public mailing list address is not a good idea&lt;/p&gt;
+
+&lt;p&gt;support@-, contactus@-, brand@-, media@company.com can easily be an (unwittingly misconfigured) public mailing list and also being used to sign up for Facebook, Twitter or Instagram since it’s convenient.&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/slack_yammer_fb.png&quot; alt=&quot;&quot; /&gt;
+Access Slack, Yammer, Facebook, Twitter and others. All from a single mailing list&lt;/p&gt;
+
+&lt;p&gt;Password reset flows are usually nice enough to include the code / token in the email’s subject or body so you don’t actually have to click a link.&lt;br /&gt;
+Some registration emails also provide the option to “copy and paste this URL into your browser’s address bar” if you can’t click the link for some reason.&lt;/p&gt;
+
+&lt;p&gt;As an example, I was able to join an organization’s Yammer network purely through Google Groups search results.
+They didn’t have “View Topics” set to “Anyone on the Internet” so I couldn’t open the signup email or even see the email in the list of topics/emails (there was no list), but the search feature was disclosing private emails, thus revealing the Yammer activation URL. Fortunately, the GET parameters are not necessary for the signup process so everything after the question mark can be discarded.&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/search_into.png&quot; alt=&quot;&quot; /&gt;
+Search for “into your browser:” and you get the activation URL that follows your search string&lt;/p&gt;
+
+&lt;p style=&quot;font-size: 75%; text-align: center;&quot;&gt;&lt;img src=&quot;/img/ggvulnz/yammer.png&quot; alt=&quot;&quot; /&gt;
+Welcome to the company’s Yammer network&lt;/p&gt;
+
+&lt;p&gt;Keep in mind that virtually infinite new accounts can be created with the same email address (mailing list):
+list@company.com and list+123@company.com are the same account on Google’s side, but treated as different in Slack and other services.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/ggvulnz/oprah.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;tools&quot;&gt;Tools&lt;/h3&gt;
+
+&lt;h4 id=&quot;edoverflow--googlegroupssh&quot;&gt;&lt;a href=&quot;https://gist.github.com/EdOverflow/8e12e8c26b6bc96168e6b55324b91fa1&quot;&gt;EdOverflow / googlegroups.sh&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;I’ve used this script to look for public Google Groups domains.
+I noticed curl was following unnecessary redirects, so I could make it run a lot faster by changing the URL.&lt;/p&gt;
+
+&lt;p&gt;Using Alexa top 1 million sites:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;wget http://s3.amazonaws.com/alexa-static/top-1m.csv.zip
+unzip top-1m.csv.zip
+&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt;.bak ‘s/.&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;,//’ top-1m.csv
+./googlegroups.sh top-1m.csv&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;I recommend removing domains that you know will be false positives to save some time. E.g. there are over 100 *.lpages.co sites:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; ‘lpages.co&lt;span class=&quot;nv&quot;&gt;$’&lt;/span&gt; top-1m.csv | &lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;   
+101
+
+vim top-1m.csv
+:%! &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; ‘lpages.co&lt;span class=&quot;nv&quot;&gt;$’&lt;/span&gt;  
+ZZ&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;maaaaz--webscreenshot&quot;&gt;&lt;a href=&quot;https://github.com/maaaaz/webscreenshot&quot;&gt;maaaaz / webscreenshot&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;I needed a tool to be able to quickly check for vulnerable mailing lists. Google Groups’ HTTP responses are obfuscated and hard to read so I opted for visual recon. Scrolling through screenshots lets you quickly see the “green text indicator”. I found webscreenshot to be reliable, but in many cases the Google Groups pages didn’t fully load before the screenshot was taken.&lt;br /&gt;
+We increased the default timeout for the PhantomJS renderer and added an option to change it manually in &lt;a href=&quot;https://github.com/maaaaz/webscreenshot/issues/22&quot;&gt;v2.8&lt;/a&gt;.&lt;br /&gt;
+I also helped in adding labels to the images in &lt;a href=&quot;https://github.com/maaaaz/webscreenshot/issues/13&quot;&gt;v2.7&lt;/a&gt; so you can quickly see the URL that belongs to the screenshot.&lt;/p&gt;
+
+&lt;h4 id=&quot;edoverflow--contactsh&quot;&gt;&lt;a href=&quot;https://github.com/EdOverflow/contact.sh&quot;&gt;EdOverflow / contact.sh&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Companies with a bug bounty program usually already have a private domain in Google Groups or have their individual mailing lists configured properly. Organizations with less security awareness are at a higher risk and ironically they are also the ones without a dedicated security contact, which makes it hard to communicate the issue.&lt;/p&gt;
+
+&lt;p&gt;contact.sh was helpful in finding contact info for the affected domains.&lt;br /&gt;
+I helped to fix a &lt;a href=&quot;https://github.com/EdOverflow/contact.sh/issues/8&quot;&gt;bug&lt;/a&gt; with the security@ email address lookup.&lt;/p&gt;
+
+&lt;p&gt;In some cases it took more time to find a contact info than it took to confirm the existence of the vulnerability.&lt;br /&gt;
+Companies above a certain size should be legally required to adopt &lt;a href=&quot;https://securitytxt.org/&quot;&gt;security.txt&lt;/a&gt; and utilize a dedicated security@ email address.&lt;/p&gt;
+
+&lt;h4 id=&quot;emtunc--slackpirate&quot;&gt;&lt;a href=&quot;https://github.com/emtunc/SlackPirate&quot;&gt;emtunc / SlackPirate&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;You might think that sending a signup or password reset email to a mailing list used by — in some cases — hundreds of people is pretty suspicious, and an admin would notice and deactivate the accounts.&lt;br /&gt;
+This may be true, but an attacker can use tools like SlackPirate to quickly dump sensitive information (private keys, passwords, API keys, links to GCP and S3 buckets, link-only Google Docs, etc.) from the breached workspace using Slack’s API.&lt;br /&gt;
+Once inside the company’s perimeter — Slack workspace in this case — these type of things are generally shared without much regard to security or authorization.&lt;/p&gt;
+
+&lt;h3 id=&quot;timeline&quot;&gt;Timeline&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Dec 13th&lt;/strong&gt; - First report to a company with a VDP (vulnerability disclosure policy)&lt;br /&gt;
+&lt;strong&gt;Dec 15th&lt;/strong&gt; - I realize this is a widespread thing and report the issue to Google (1st report) and Slack&lt;br /&gt;
+&lt;strong&gt;Dec 16th&lt;/strong&gt; - I find one of Google’s major projects to be vulnerable as well and open a 2nd report as a PoC for the 1st one&lt;br /&gt;
+&lt;strong&gt;Dec 17th&lt;/strong&gt; - Google closes my 1st report as “Won’t fix (Intended Behaviour)”:&lt;br /&gt;
+&lt;em&gt;“The decision to prevent signups on Yammer or Slack via email confirmations coming from public Google Groups should be determine (sic) by those providers and not Google. I would recommend reaching out to both companies about this issue.”&lt;/em&gt;&lt;br /&gt;
+&lt;strong&gt;Dec 17th&lt;/strong&gt; - I comment on my 2nd Google report, emphasizing that this logic flaw completely bypasses Slack’s &lt;a href=&quot;https://slack.com/intl/en-hu/help/articles/212221668-Mandatory-workspace-two-factor-authentication&quot;&gt;mandatory workspace 2FA&lt;/a&gt; as well. I could easily set it up for myself when joining the Google project’s workspace.&lt;br /&gt;
+I also asked Slack to consider having mandatory review of new accounts for workspaces where mandatory 2FA is turned on.&lt;br /&gt;
+&lt;strong&gt;Dec 18th&lt;/strong&gt; - report to Microsoft (Yammer)&lt;br /&gt;
+&lt;strong&gt;Dec 19th&lt;/strong&gt; - Microsoft closes my report, claiming that it relied on social engineering. :) &lt;br /&gt;
+&lt;strong&gt;Dec 20th&lt;/strong&gt; - Slack closes my issue:&lt;br /&gt;
+&lt;em&gt;“While the behavior you described in your report is quite interesting, we feel that this is a case where improved user education rather than a technical fix of some type would be a more appropriate action. Ultimately, users are responsible for ensuring that the domain they are using to sign up for their Workspace does not have a publicly readable email inbox.”&lt;/em&gt;&lt;br /&gt;
+…&lt;br /&gt;
+&lt;em&gt;“You suggested attempting to check Google Groups itself for an existing mailing list, and while this may be a useful method of finding a potential target, it’s impractical to prevent such an attack at scale. Google Groups is certainly not the only existing service that can create an open inbox in this way. Surely you’re not suggesting that Slack check every mailing list service on the Internet with each new Team sign-up to determine if it’s an unsafe email address?”&lt;/em&gt;&lt;br /&gt;
+&lt;strong&gt;Dec 31st&lt;/strong&gt; - Google on my 2nd report:&lt;br /&gt;
+&lt;em&gt;“I’ve shared your submission with our team working on [PROJECT] to investigate this further. Since it’s a holiday period, we are expecting longer delays — apologies for that in advance!”&lt;/em&gt;&lt;br /&gt;
+&lt;strong&gt;Jan 8th&lt;/strong&gt; - Google closed my 2nd report as “Won’t fix (Intended Behaviour)”:&lt;br /&gt;
+&lt;em&gt;“As I mentioned, we have shared your report with the [PROJECT] team for their review. Unfortunately, this is not a technical bug that would be in scope of our program and that is why we made the decision not to track it as a security bug.”&lt;/em&gt;&lt;br /&gt;
+&lt;strong&gt;Jan 20th&lt;/strong&gt; - Publish this blogpost&lt;/p&gt;
+
+&lt;p&gt;You read that right, everything I’ve said so far is still in effect.&lt;br /&gt;
+By the way Google does have a category for “Logic flaw bugs bypassing significant security controls” in their &lt;a href=&quot;https://www.google.com/about/appsecurity/reward-program/&quot;&gt;Vulnerability Reward Program&lt;/a&gt;, so this is not even a valid argument for rejecting my report.&lt;/p&gt;
+
+&lt;p&gt;I left out Facebook (and Workplace), Twitter and other vendors from the timeline to keep it short, but basically everyone was blaming the users for having a “publicly readable email inbox”.&lt;/p&gt;
+
+&lt;h3 id=&quot;am-i-affected&quot;&gt;Am I affected?&lt;/h3&gt;
+
+&lt;p&gt;This vulnerability exists if your organization has at least one public mailing list and your Slack allows for signup with an @company.com email address or you use Yammer, Workplace, etc.&lt;/p&gt;
+
+&lt;p&gt;Ideally &lt;a href=&quot;https://groups.google.com/a/[DOMAIN]/forum/#!forumsearch/&quot;&gt;https://groups.google.com/a/[DOMAIN]/forum/#!forumsearch/&lt;/a&gt; should show the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/ggvulnz/private.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If it displays anything else, review your settings in G Suite and make sure that your publicly visible mailing lists restrict posting to @company.com email addresses or members only.&lt;br /&gt;
+Also, set your Slack workspace to use SSO (e.g. Okta) or make it invite-only.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;Having a public mailing list where you want to discuss topics with people outside your company seems to be a completely normal idea. Having a Slack workspace that allows for registration with a company email address is not special either. But sometimes you put two and two together and the result ends up being five.&lt;/p&gt;
+
+&lt;p&gt;Google Groups is not only a privacy disaster, but also a security threat for many organisations.&lt;br /&gt;
+Google has unknowingly created an email service provider that can give free @company.com email addresses to the public and is not willing to take responsibility for it. I’m publishing this in the hope that the publicity would push Google to mitigate the risk and also to help raise awareness.&lt;/p&gt;</content><author><name></name></author><summary type="html">This logic flaw is the lovechild of two previous reports:</summary></entry></feed>

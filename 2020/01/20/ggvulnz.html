@@ -1,0 +1,526 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>GGvulnz - How I hacked hundreds of companies through Google Groups - Milan Magyar</title>
+<meta name="description" content="This logic flaw is the lovechild of two previous reports:">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Milan Magyar">
+<meta property="og:title" content="GGvulnz - How I hacked hundreds of companies through Google Groups">
+<meta property="og:url" content="https://milangfx.github.io/2020/01/20/ggvulnz.html">
+
+
+  <meta property="og:description" content="This logic flaw is the lovechild of two previous reports:">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-01-20T00:00:00+01:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://milangfx.github.io/2020/01/20/ggvulnz.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://milangfx.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Milan Magyar Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--posts">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Milan Magyar
+          
+        </a>
+        <ul class="visible-links"></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="archive">
+    
+      <h1 id="page-title" class="page__title">GGvulnz - How I hacked hundreds of companies through Google Groups</h1>
+    
+    <p>This logic flaw is the lovechild of two previous reports:</p>
+
+<p>One: <a href="https://medium.com/intigriti/how-i-hacked-hundreds-of-companies-through-their-helpdesk-b7680ddc2d4c">How I hacked hundreds of companies through their helpdesk</a> — aka “Ticket Trick” by Inti De Ceukelaire</p>
+
+<p>Two: <a href="https://www.kennasecurity.com/blog/widespread-google-groups-misconfiguration-exposes-sensitive-information/">Kenna Security’s research on the widespread Google Groups misconfiguration</a> issue affecting thousands of instances, “Fortune 500 organizations; Hospitals; Universities and Colleges; Newspapers and Television stations; and even US government agencies”.</p>
+
+<p>I would suggest reading both as they are the building blocks of this one.</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/logo.png" alt="ggvulnz_logo.png" />
+Yes, a name and a logo. I had to.</p>
+
+<p>I was looking at the emails inside a company’s Google Groups instance when I noticed some are related to various account registrations. My spidey sense told me to look up <a href="https://medium.com/u/f9e27197ffb5">Inti De Ceukelaire</a>’s paper, something I faintly remembered reading over 2 years ago. After processing that report again, I realized it’s actually relevant to my scenario.</p>
+
+<p>The Ticket Trick bug relied on the existence of issue trackers or helpdesk software that allow you to open tickets through email. An attacker had to sign up to the target’s main service with a special email address, exploiting the lack of address validation (or circumventing the one in place) and log into the target’s help desk service through SSO. In this case, all those components are simply replaced by the service of Google Groups mailing lists.</p>
+
+<p>Here’s the sequence diagram of the bug:</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/sequence.png" alt="" />
+My finest work in GIMP so far</p>
+
+<h3 id="method-a">METHOD A)</h3>
+
+<p>The method above works when the mailing list has the “Anyone can view content.” and “Anyone can post.” permissions.<br />
+The first one is necessary for us to be able to see and open the email and the second is to let Slack (and other external services) post to the mailing list.</p>
+
+<p><img src="/img/ggvulnz/about.png" alt="" /></p>
+
+<p>In the screenshot below the green text under the mailing list indicates that you have at least view access to the topics/emails.</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/android.png" alt="" />
+Only @android.com email addresses can post, so these mailing lists are not vulnerable</p>
+
+<p>How to exploit this logic flaw in a few easy steps:</p>
+
+<ol>
+  <li>Visit https://groups.google.com/a/$domain/forum/#!forumsearch/ and look for a public mailing list</li>
+  <li>Clicking the list will take you to: https://groups.google.com/a/$domain/forum/#!forum/$listname</li>
+  <li>Visit one of these pages in another tab and enter this email address: $listname@$domain<br />
+ <a href="https://slack.com/signin/find">https://slack.com/signin/find</a><br />
+ <a href="https://www.yammer.com/signup/">https://www.yammer.com/signup/</a><br />
+ <a href="https://work.workplace.com/">https://work.workplace.com/</a><br />
+ <a href="https://twitter.com/account/begin_password_reset">https://twitter.com/account/begin_password_reset</a>
+ <a href="https://www.facebook.com/login/identify/">https://www.facebook.com/login/identify/</a><br />
+ <a href="https://www.instagram.com/accounts/password/reset/">https://www.instagram.com/accounts/password/reset/</a><br />
+ …</li>
+  <li>Refresh the mailing list from Step 2) and open the email you got from the service in Step 3)</li>
+  <li>Click the confirmation link (or copy the account recovery code, other ~6 digit code from the email’s subject / body).</li>
+</ol>
+
+<h3 id="method-b">METHOD B)</h3>
+
+<p>There’s an other case when the Google Groups instance in misconfigured in a way that all mailing lists seem to be locked off properly at first glance, but search results disclose snippets of private emails’ around the search keywords.</p>
+
+<p>In this example none of the mailing lists have the green <em>“#XY topics last post: $DATE”</em> indicator, so we shouldn’t be able to read emails sent to them.<br />
+The domain owner is probably confident that unathorized parties don’t have access to internal communication.</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/nogreen.png" alt="" />
+No green text here</p>
+
+<p>But searching for “password” for example, discloses sensitive emails:</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/search_password.png" alt="" />
+:(</p>
+
+<p>Note that this is something that Google has known about since at least Kenna Security’s research back in 2018. Yet they decided that the privacy and security of their customers is not that important that anything should be done about it. Google Groups access controls are still as foggy as they were years ago.<br />
+GDPR’s <a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">wiki page</a> says that “Controllers and processors of personal data must put in place appropriate technical and organizational measures to implement the data protection principles.” I think Google should at least alert its customers when those “appropriate technical measures” are not in place.</p>
+
+<p>Compared to METHOD A), the steps to exploit are a bit different here:</p>
+
+<ol>
+  <li>You don’t know the name of the mailing list that is misconfigured to begin with, so you first search for something that has a high probability of being in an email’s subject or body, something like the letter ‘a’, “hi” or “hello”.</li>
+  <li>Hover your mouse over the group’s name in one of the search results to see the URL it points to:<br />
+ <a href="https://groups.google.com/a/$domain/forum/#!forum/$listname">https://groups.google.com/a/$domain/forum/#!forum/$listname</a> corresponds to the $listname@$domain email address.</li>
+  <li>Send a test email or directly a signup / password reset email from Method A)’s Step 3) and hope that it appears in your search results, since you didn’t have a chance to confirm the “Anyone can post” permission because you don’t have access to the “About Group” page either.</li>
+  <li>Search for your test email to confirm that external senders are allowed or search for a string that’s part of the target service’s signup / password reset email.</li>
+</ol>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/search_facebook.png" alt="" />
+Signing up for Facebook with a public mailing list address is not a good idea</p>
+
+<p>support@-, contactus@-, brand@-, media@company.com can easily be an (unwittingly misconfigured) public mailing list and also being used to sign up for Facebook, Twitter or Instagram since it’s convenient.</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/slack_yammer_fb.png" alt="" />
+Access Slack, Yammer, Facebook, Twitter and others. All from a single mailing list</p>
+
+<p>Password reset flows are usually nice enough to include the code / token in the email’s subject or body so you don’t actually have to click a link.<br />
+Some registration emails also provide the option to “copy and paste this URL into your browser’s address bar” if you can’t click the link for some reason.</p>
+
+<p>As an example, I was able to join an organization’s Yammer network purely through Google Groups search results.
+They didn’t have “View Topics” set to “Anyone on the Internet” so I couldn’t open the signup email or even see the email in the list of topics/emails (there was no list), but the search feature was disclosing private emails, thus revealing the Yammer activation URL. Fortunately, the GET parameters are not necessary for the signup process so everything after the question mark can be discarded.</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/search_into.png" alt="" />
+Search for “into your browser:” and you get the activation URL that follows your search string</p>
+
+<p style="font-size: 75%; text-align: center;"><img src="/img/ggvulnz/yammer.png" alt="" />
+Welcome to the company’s Yammer network</p>
+
+<p>Keep in mind that virtually infinite new accounts can be created with the same email address (mailing list):
+list@company.com and list+123@company.com are the same account on Google’s side, but treated as different in Slack and other services.</p>
+
+<p><img src="/img/ggvulnz/oprah.jpeg" alt="" /></p>
+
+<h3 id="tools">Tools</h3>
+
+<h4 id="edoverflow--googlegroupssh"><a href="https://gist.github.com/EdOverflow/8e12e8c26b6bc96168e6b55324b91fa1">EdOverflow / googlegroups.sh</a></h4>
+
+<p>I’ve used this script to look for public Google Groups domains.
+I noticed curl was following unnecessary redirects, so I could make it run a lot faster by changing the URL.</p>
+
+<p>Using Alexa top 1 million sites:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">wget http://s3.amazonaws.com/alexa-static/top-1m.csv.zip
+unzip top-1m.csv.zip
+<span class="nb">sed</span> <span class="nt">-i</span>.bak ‘s/.<span class="k">*</span>,//’ top-1m.csv
+./googlegroups.sh top-1m.csv</code></pre></figure>
+
+<p>I recommend removing domains that you know will be false positives to save some time. E.g. there are over 100 *.lpages.co sites:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">grep</span> ‘lpages.co<span class="nv">$’</span> top-1m.csv | <span class="nb">wc</span> <span class="nt">-l</span>   
+101
+
+vim top-1m.csv
+:%! <span class="nb">grep</span> <span class="nt">-v</span> ‘lpages.co<span class="nv">$’</span>  
+ZZ</code></pre></figure>
+
+<h4 id="maaaaz--webscreenshot"><a href="https://github.com/maaaaz/webscreenshot">maaaaz / webscreenshot</a></h4>
+
+<p>I needed a tool to be able to quickly check for vulnerable mailing lists. Google Groups’ HTTP responses are obfuscated and hard to read so I opted for visual recon. Scrolling through screenshots lets you quickly see the “green text indicator”. I found webscreenshot to be reliable, but in many cases the Google Groups pages didn’t fully load before the screenshot was taken.<br />
+We increased the default timeout for the PhantomJS renderer and added an option to change it manually in <a href="https://github.com/maaaaz/webscreenshot/issues/22">v2.8</a>.<br />
+I also helped in adding labels to the images in <a href="https://github.com/maaaaz/webscreenshot/issues/13">v2.7</a> so you can quickly see the URL that belongs to the screenshot.</p>
+
+<h4 id="edoverflow--contactsh"><a href="https://github.com/EdOverflow/contact.sh">EdOverflow / contact.sh</a></h4>
+
+<p>Companies with a bug bounty program usually already have a private domain in Google Groups or have their individual mailing lists configured properly. Organizations with less security awareness are at a higher risk and ironically they are also the ones without a dedicated security contact, which makes it hard to communicate the issue.</p>
+
+<p>contact.sh was helpful in finding contact info for the affected domains.<br />
+I helped to fix a <a href="https://github.com/EdOverflow/contact.sh/issues/8">bug</a> with the security@ email address lookup.</p>
+
+<p>In some cases it took more time to find a contact info than it took to confirm the existence of the vulnerability.<br />
+Companies above a certain size should be legally required to adopt <a href="https://securitytxt.org/">security.txt</a> and utilize a dedicated security@ email address.</p>
+
+<h4 id="emtunc--slackpirate"><a href="https://github.com/emtunc/SlackPirate">emtunc / SlackPirate</a></h4>
+
+<p>You might think that sending a signup or password reset email to a mailing list used by — in some cases — hundreds of people is pretty suspicious, and an admin would notice and deactivate the accounts.<br />
+This may be true, but an attacker can use tools like SlackPirate to quickly dump sensitive information (private keys, passwords, API keys, links to GCP and S3 buckets, link-only Google Docs, etc.) from the breached workspace using Slack’s API.<br />
+Once inside the company’s perimeter — Slack workspace in this case — these type of things are generally shared without much regard to security or authorization.</p>
+
+<h3 id="timeline">Timeline</h3>
+
+<p><strong>Dec 13th</strong> - First report to a company with a VDP (vulnerability disclosure policy)<br />
+<strong>Dec 15th</strong> - I realize this is a widespread thing and report the issue to Google (1st report) and Slack<br />
+<strong>Dec 16th</strong> - I find one of Google’s major projects to be vulnerable as well and open a 2nd report as a PoC for the 1st one<br />
+<strong>Dec 17th</strong> - Google closes my 1st report as “Won’t fix (Intended Behaviour)”:<br />
+<em>“The decision to prevent signups on Yammer or Slack via email confirmations coming from public Google Groups should be determine (sic) by those providers and not Google. I would recommend reaching out to both companies about this issue.”</em><br />
+<strong>Dec 17th</strong> - I comment on my 2nd Google report, emphasizing that this logic flaw completely bypasses Slack’s <a href="https://slack.com/intl/en-hu/help/articles/212221668-Mandatory-workspace-two-factor-authentication">mandatory workspace 2FA</a> as well. I could easily set it up for myself when joining the Google project’s workspace.<br />
+I also asked Slack to consider having mandatory review of new accounts for workspaces where mandatory 2FA is turned on.<br />
+<strong>Dec 18th</strong> - report to Microsoft (Yammer)<br />
+<strong>Dec 19th</strong> - Microsoft closes my report, claiming that it relied on social engineering. :) <br />
+<strong>Dec 20th</strong> - Slack closes my issue:<br />
+<em>“While the behavior you described in your report is quite interesting, we feel that this is a case where improved user education rather than a technical fix of some type would be a more appropriate action. Ultimately, users are responsible for ensuring that the domain they are using to sign up for their Workspace does not have a publicly readable email inbox.”</em><br />
+…<br />
+<em>“You suggested attempting to check Google Groups itself for an existing mailing list, and while this may be a useful method of finding a potential target, it’s impractical to prevent such an attack at scale. Google Groups is certainly not the only existing service that can create an open inbox in this way. Surely you’re not suggesting that Slack check every mailing list service on the Internet with each new Team sign-up to determine if it’s an unsafe email address?”</em><br />
+<strong>Dec 31st</strong> - Google on my 2nd report:<br />
+<em>“I’ve shared your submission with our team working on [PROJECT] to investigate this further. Since it’s a holiday period, we are expecting longer delays — apologies for that in advance!”</em><br />
+<strong>Jan 8th</strong> - Google closed my 2nd report as “Won’t fix (Intended Behaviour)”:<br />
+<em>“As I mentioned, we have shared your report with the [PROJECT] team for their review. Unfortunately, this is not a technical bug that would be in scope of our program and that is why we made the decision not to track it as a security bug.”</em><br />
+<strong>Jan 20th</strong> - Publish this blogpost</p>
+
+<p>You read that right, everything I’ve said so far is still in effect.<br />
+By the way Google does have a category for “Logic flaw bugs bypassing significant security controls” in their <a href="https://www.google.com/about/appsecurity/reward-program/">Vulnerability Reward Program</a>, so this is not even a valid argument for rejecting my report.</p>
+
+<p>I left out Facebook (and Workplace), Twitter and other vendors from the timeline to keep it short, but basically everyone was blaming the users for having a “publicly readable email inbox”.</p>
+
+<h3 id="am-i-affected">Am I affected?</h3>
+
+<p>This vulnerability exists if your organization has at least one public mailing list and your Slack allows for signup with an @company.com email address or you use Yammer, Workplace, etc.</p>
+
+<p>Ideally <a href="https://groups.google.com/a/[DOMAIN]/forum/#!forumsearch/">https://groups.google.com/a/[DOMAIN]/forum/#!forumsearch/</a> should show the following:</p>
+
+<p><img src="/img/ggvulnz/private.png" alt="" /></p>
+
+<p>If it displays anything else, review your settings in G Suite and make sure that your publicly visible mailing lists restrict posting to @company.com email addresses or members only.<br />
+Also, set your Slack workspace to use SSO (e.g. Okta) or make it invite-only.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>Having a public mailing list where you want to discuss topics with people outside your company seems to be a completely normal idea. Having a Slack workspace that allows for registration with a company email address is not special either. But sometimes you put two and two together and the result ends up being five.</p>
+
+<p>Google Groups is not only a privacy disaster, but also a security threat for many organisations.<br />
+Google has unknowingly created an email service provider that can give free @company.com email addresses to the public and is not willing to take responsibility for it. I’m publishing this in the hope that the publicity would push Google to mitigate the risk and also to help raise awareness.</p>
+
+
+
+<ul class="taxonomy__index">
+  
+  
+    <li>
+      <a href="#2021">
+        <strong>2021</strong> <span class="taxonomy__count">1</span>
+      </a>
+    </li>
+  
+    <li>
+      <a href="#2020">
+        <strong>2020</strong> <span class="taxonomy__count">1</span>
+      </a>
+    </li>
+  
+</ul>
+
+
+
+
+  <section id="2021" class="taxonomy__section">
+    <h2 class="archive__subtitle">2021</h2>
+    <div class="entries-list">
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2021/04/20/ggvulnz-aftermath.html" rel="permalink">GGvulnz aftermath - How I forced Google to redesign Groups*
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-20T22:09:23+02:00">April 20, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">I’m a bit late with this post, but people were wondering if the methods described in the first GGVulnz post are still applicable today.
+</p>
+  </article>
+</div>
+
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
+
+  <section id="2020" class="taxonomy__section">
+    <h2 class="archive__subtitle">2020</h2>
+    <div class="entries-list">
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/2020/01/20/ggvulnz.html" rel="permalink">GGvulnz - How I hacked hundreds of companies through Google Groups
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-01-20T00:00:00+01:00">January 20, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">This logic flaw is the lovechild of two previous reports:
+</p>
+  </article>
+</div>
+
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
+
+
+  </div>
+</div>
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/0xmilan" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/milangfx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 Milan Magyar. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
